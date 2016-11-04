@@ -1,14 +1,13 @@
-
- $(document).ready(function(){
+$(document).ready(function(){  
 
 var pickWord = function() {
 	
 	var words = [  
-		"javascript",
-		"css",
-		"michael",
-		"jim",
-		"hector"
+		"zilker",
+		"mopac",
+		"dirtysixth",
+		"rainystreet",
+		"bartonsprings"
 		];
 
 	return words[Math.floor(Math.random()*words.length)];
@@ -81,6 +80,8 @@ var remainingLetters = word.length;
 
 //Main Game Loop
 
+ $("#clickMe").on("click", function() {
+
 while(remainingLetters > 0){showPlayerProgress(answerArray);
 	var guess = getGuess();
 	if(guess === null){
@@ -90,24 +91,17 @@ while(remainingLetters > 0){showPlayerProgress(answerArray);
 		alert("Please enter a single letter.")
 
 	}else{
-		varCorrectGuess = updateGameState(guess, word, answerArray);
-		remainingLetters = remainingLetters - correctGuesses;
+		var correctGuess = updateGameState(guess, word, answerArray);
+		remainingLetters = remainingLetters - correctGuess;
 
+	}
+
+	
 	}
 
 	showAnswerAndCongratulatePlayer(answerArray);
 
-	}
-
-
-
-
-
-
-
-
-
-
+});
 
 
 
@@ -115,6 +109,12 @@ while(remainingLetters > 0){showPlayerProgress(answerArray);
 
 
 });
+
+
+
+
+
+
 
 
   	
