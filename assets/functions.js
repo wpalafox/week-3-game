@@ -1,6 +1,3 @@
-
- $(document).ready(function(){
-
 var pickWord = function() {
 	
 	var words = [  
@@ -27,14 +24,14 @@ var setupAnswerArray = function(word) {
 	
 	return answerArray;
 
-	};
+};
 
 
 var showPlayerProgress = function(answerArray){
 	
 	alert(answerArray.join(" "));
 
-	};
+};
 
 
 var getGuess = function(){
@@ -44,7 +41,7 @@ var getGuess = function(){
 
 	
 
-	};
+};
 
 
 
@@ -72,7 +69,7 @@ var showAnswerAndCongratulatePlayer = function(answerArray){
 	showPlayerProgress(answerArray);
 	alert("Good job! The answer was " + answerArray.join(" "));
 
-	};
+};
 
 
 var word = pickWord();
@@ -83,21 +80,19 @@ var remainingLetters = word.length;
 
 while(remainingLetters > 0){showPlayerProgress(answerArray);
 	var guess = getGuess();
-	if(guess === null){
+	if guess (guess === null){
 		break;
 
 	} else if (guess.length !== 1){
 		alert("Please enter a single letter.")
 
 	}else{
-		varCorrectGuess = updateGameState(guess, word, answerArray);
+		varCorrectGuess = updateGameState(guess, word, answerArray)
+			;
 		remainingLetters = remainingLetters - correctGuesses;
 
 	}
 
-	showAnswerAndCongratulatePlayer(answerArray);
-
-	}
 
 
 
@@ -105,18 +100,9 @@ while(remainingLetters > 0){showPlayerProgress(answerArray);
 
 
 
+}
 
 
 
-
-
-
-
-
-
-});
-
-
-  	
 
 
