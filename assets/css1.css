@@ -1,0 +1,43 @@
+#container{
+
+	width: 50%;
+	border-radius: 10px;
+	padding: 10px 10px 10px 50px;
+	background-color: #D18E1A
+	margin: 10%;
+	text-align: left;
+
+
+
+
+}
+
+
+#letters a{
+	color: white;
+	background-color: orange;
+	border-radius: 5px; 
+	paddin: 5px;  
+	cursor: pointer;
+
+}
+
+
+#letters a:hover{
+
+	color: red;
+
+
+
+}
+
+#letters a .d{
+	color: gold;
+	text-decoration: underline;
+
+}
+
+
+
+
+

@@ -1,14 +1,19 @@
 $(document).ready(function(){  
 
-var pickWord = function() {
+var chooseWord = function() {
 	
 	var words = [  
-		"zilker",
+		"zilkerpark",
 		"mopac",
-		"dirtysixth",
+		"sixthstreet",
 		"rainystreet",
-		"bartonsprings"
-		];
+		"bartonsprings",
+		"texasstatecapital",
+		"laketravis",
+		"cathedralofjunk",
+		"snarfs",
+		"homslicepizza",
+	];
 
 	return words[Math.floor(Math.random()*words.length)];
 
@@ -39,7 +44,7 @@ var showPlayerProgress = function(answerArray){
 var getGuess = function(){
 
 
-	return prompt("Guess a letter, or click cancel to stop.");
+	return prompt("guess a letter");
 
 	
 
@@ -50,7 +55,7 @@ var getGuess = function(){
 
 var updateGameState = function(guess, word, answerArray){
 
-//Update answerArray and return a number showing how many times the huess appears in the 
+//Update answerArray and return a number showing how many times the guess appears in the 
 
 	var appearances = 0;
 	for(var j = 0; j < word.length; j++){
@@ -69,12 +74,12 @@ var updateGameState = function(guess, word, answerArray){
 var showAnswerAndCongratulatePlayer = function(answerArray){
 
 	showPlayerProgress(answerArray);
-	alert("Good job! The answer was " + answerArray.join(" "));
+	alert("sweet, the answer was " + answerArray.join(" "));
 
 	};
 
 
-var word = pickWord();
+var word = chooseWord();
 var answerArray = setupAnswerArray(word);
 var remainingLetters = word.length;
 
@@ -88,7 +93,7 @@ while(remainingLetters > 0){showPlayerProgress(answerArray);
 		break;
 
 	} else if (guess.length !== 1){
-		alert("Please enter a single letter.")
+		alert("enter a single letter, please")
 
 	}else{
 		var correctGuess = updateGameState(guess, word, answerArray);
