@@ -1,12 +1,23 @@
-#container{
+body {
 
-	width: 50%;
+	background-color: #D57725;
+
+
+
+
+
+}
+
+
+
+
+#container-fluid{
+
+	width: 90%;
 	border-radius: 10px;
-	padding: 10px 10px 10px 50px;
-	background-color: #D18E1A
-	margin: 10%;
+	background-color: #D47F2A
 	text-align: left;
-
+	padding-left: 20px;
 
 
 
@@ -18,22 +29,28 @@
 	background-color: orange;
 	border-radius: 5px; 
 	paddin: 5px;  
-	cursor: pointer;
+	cursor: crosshair;
 
 }
 
+#buttons{
+    padding: 50px 10px;
+    font-size: 22px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    		border-color: pink;
+    }
 
-#letters a:hover{
 
-	color: red;
+#word{
+	font-style: normal;
+	font-size: 30px;
+	border-style: dotted;
+	border-color: blue;
 
 
-
-}
-
-#letters a .d{
-	color: gold;
-	text-decoration: underline;
 
 }
 
