@@ -129,13 +129,11 @@ $("#clickMe").on("click", function() {
 
 
 
-	for(var i = 0; i < word.length;i++){
-		console.log(i);
-		answerArray[i] = "____";
+	
 		
-		$("#word").append("<span> " + answerArray[i] + "</span>");
+		$("#wordLength").append("<h2>This is a " + word.length + " letter word</h2>");
 	 	
-	} 
+
 
 	};
 	
@@ -157,25 +155,21 @@ $(".btn-primary").on("click", function(){
 	console.log("var holds value %s",letter);
 	console.log("word var is %s",word);
 
-	for(i=0;i<word.length;i++){
+	for(i=0;i <= word.length;i++){
 
 		if(letter == word[i]){
 			
 			answerArray[i] = word[i];
-
+			
 			console.log("Good guess! %s", answerArray); 
-
-
+			
+			
+			$("#wordDisplay").append("<span>" + answerArray[i] + "</span>");
+		
 		}
 
 
-
-
-
 	}
-
-
-
 
 });
 
