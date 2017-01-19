@@ -1,8 +1,21 @@
 $(document).ready(function(){  
 
+//Arrays to host the incorrect and correct guesses
+var wrongGuesses = [];
+var rightGuesses = [];
+var lettersArray = []; 
+var answerArray = [];
+
+answerArray.join("");
+
+var removedLetter;
+
+//variables to check game status
+var gameOver =false;
+var guessesRemaining = 12;
+
 
 //====================FUNCTIONS===============================//
-
 
 
 // Dynatically create alphabet buttons 
@@ -12,7 +25,13 @@ $(document).ready(function(){
  "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", 
  "X", "Y", "Z"];
 
+ 
+var createButtons = function(){ 
+ 
+
+
  for(var i = 0; i < letters.length; i++){
+
 
 //Inside the loop....
 
@@ -27,11 +46,15 @@ $(document).ready(function(){
 	$("#buttons").append(letterBtn);
 
  
+	};
+
 };
 
 
-var chooseWord = function() {
 
+
+
+var chooseWord = function() {
 
 //Beginning of alert-based program 
 	var words = [  
@@ -52,17 +75,130 @@ var chooseWord = function() {
 };
 
 
+var word = chooseWord();
+
+var remainingLetters = word.length;
 
 
 
 
+
+//======================ONCLICKEVENTS=========================//
+
+//Start Game
+
+$("#clickMe").on("click", function() {
+
+	
+
+	createButtons();
+
+	chooseWord(); 
+ 	
+	var setupAnswerArray = function() {
+
+	var answerArray = [];
+	console.log(answerArray);
+	console.log(word);
+
+
+
+	
+		
+		$("#wordLength").append("<h2> "+ word.length + " letter word</h2>");
+	 	
+
+
+	};
+	
+	var answerArray = setupAnswerArray(word);
+ 	
+ 	$("#clickMe").remove();
+ 	//showPlayerProgress(answerArray);
+
+});
+
+
+//Create an "on-click" event attached to the "letters"
+//Guess a letter and validate guess - basically the game loop
+$(document).on("click",".btn-primary" ,function(){
+
+	//Set of instructions to delete the pushed button 
+
+	var letter = $(this).attr('dataLetter');
+	
+	var index = letters.indexOf(letter);
+
+	console.log("Index of letter is: "
+		+ index);
+
+	if(index > -1){
+		letters.splice(index, 1);
+	}
+
+	$('#buttons').empty();
+
+	createButtons();
+
+	 for(i=0;i <= word.length ;i++){
+
+		if(letter == word[i]){
+			
+			//splice the letter in the appropriate index position
+			answerArray.splice(i, 0, word[i]);
+
+			console.log("Good guess! %s", answerArray.join(""));
+
+			console.log("in Func");
+			
+			$("#wordDisplay").empty();
+			
+			$("#wordDisplay").append("<h2>" + answerArray.join("") + "</h2>");
+		
+		}
+
+
+	}
+
+	if(answerArray.length === word.length){
+
+		alert("You Win! Keep Austin Weird :)");
+		$("#youWin").append("<h2>YOU WON!</h2>");
+		console.log("Congratualtions!")
+	}
+
+
+});
+
+
+
+
+
+
+
+//Document Ready 
+});
+
+
+
+
+
+
+
+
+
+
+
+//Code Graveyard
+
+
+/*
 
 var showPlayerProgress = function(answerArray){
 	
 	alert(answerArray.join(" "));
 
 };
-
 
 var getGuess = function(){
 
@@ -72,6 +208,14 @@ var getGuess = function(){
 	
 };
 
+
+
+var showAnswerAndCongratulatePlayer = function(answerArray){
+
+	showPlayerProgress(answerArray);
+	alert("sweet, the answer was " + answerArray.join(" "));
+
+	};
 
 
 
@@ -94,141 +238,6 @@ var updateGameState = function(guess, word, answerArray){
 	return appearances;
 		
 };
-
-var showAnswerAndCongratulatePlayer = function(answerArray){
-
-	showPlayerProgress(answerArray);
-	alert("sweet, the answer was " + answerArray.join(" "));
-
-	};
-
-
-
-
-var word = chooseWord();
-
-var remainingLetters = word.length;
-
-
-
-
-
-//======================ONCLICKEVENTS=========================//
-
-//Start Game
-
-$("#clickMe").on("click", function() {
-
-	chooseWord(); 
- 	
-	var setupAnswerArray = function() {
-
-	var answerArray = [];
-	console.log(answerArray);
-	console.log(word);
-
-
-
-	
-		
-		$("#wordLength").append("<h2>This is a " + word.length + " letter word</h2>");
-	 	
-
-
-	};
-	
-	var answerArray = setupAnswerArray(word);
- 	
- 	$("#clickMe").remove();
- 	//showPlayerProgress(answerArray);
-
-});
-
-
-//Create an "on-click" event attached to the "letters"
-//Guess a letter and validate guess 
-$(".btn-primary").on("click", function(){
-
-	answerArray = [];
-
-	var letter = $(this).attr('dataLetter');
-	console.log("var holds value %s",letter);
-	console.log("word var is %s",word);
-
-	for(i=0;i <= word.length;i++){
-
-		if(letter == word[i]){
-			
-			answerArray[i] = word[i];
-			
-			console.log("Good guess! %s", answerArray); 
-			
-			
-			$("#wordDisplay").append("<span>" + answerArray[i] + "</span>");
-		
-		}
-
-
-	}
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Document Ready 
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
 
 while(remainingLetters > 0){
 	showPlayerProgress(answerArray);
@@ -253,26 +262,5 @@ while(remainingLetters > 0){
 	showAnswerAndCongratulatePlayer(answerArray); 
 
 	*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  	
 
 
