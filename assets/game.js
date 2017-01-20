@@ -3,7 +3,7 @@ $(document).ready(function(){
 //Arrays to host the incorrect and correct guesses
 var wrongGuesses = [];
 var rightGuesses = [];
-var lettersArray = []; 
+
 var answerArray = [];
 
 answerArray.join("");
@@ -13,7 +13,7 @@ var removedLetter;
 //variables to check game status
 var gameOver =false;
 var guessesRemaining = 12;
-
+var count = 0; 
 
 //====================FUNCTIONS===============================//
 
@@ -51,9 +51,6 @@ var createButtons = function(){
 };
 
 
-
-
-
 var chooseWord = function() {
 
 //Beginning of alert-based program 
@@ -68,16 +65,19 @@ var chooseWord = function() {
 		"LESLIE",
 		"MUSIC",
 		"WHATABURGER",
+		"HOMESLICE",
+		"HOPDODDY",
+		"GUADALUPE"
 	];
 
-	return words[Math.floor(Math.random()*words.length)];
+	return word = words[Math.floor(Math.random()*words.length)];
 
 };
 
 
-var word = chooseWord();
 
-var remainingLetters = word.length;
+
+
 
 
 
@@ -88,12 +88,25 @@ var remainingLetters = word.length;
 //Start Game
 
 $("#clickMe").on("click", function() {
-
 	
 
+	//clears all buttons then generates new ones
+	$("#buttons").empty();
 	createButtons();
+	
 
+	//empties counts
+	$("#countDisplay").empty();
+	
+	
+	
+	//Empties word display and chooses a new word
+	$("#wordDisplay").empty();
 	chooseWord(); 
+
+	var word = chooseWord();
+
+	var remainingLetters = word.length;
  	
 	var setupAnswerArray = function() {
 
@@ -101,11 +114,9 @@ $("#clickMe").on("click", function() {
 	console.log(answerArray);
 	console.log(word);
 
+	$("#wordLength").empty();
 
-
-	
-		
-		$("#wordLength").append("<h2> "+ word.length + " letter word</h2>");
+	$("#wordLength").append("<h2> "+ word.length + " letter word</h2>");
 	 	
 
 
@@ -113,7 +124,7 @@ $("#clickMe").on("click", function() {
 	
 	var answerArray = setupAnswerArray(word);
  	
- 	$("#clickMe").remove();
+ 	//$("#clickMe").remove();
  	//showPlayerProgress(answerArray);
 
 });
@@ -122,6 +133,14 @@ $("#clickMe").on("click", function() {
 //Create an "on-click" event attached to the "letters"
 //Guess a letter and validate guess - basically the game loop
 $(document).on("click",".btn-primary" ,function(){
+
+	//handles and displays the number of attempts 
+	$("#countDisplay").empty();
+	count++;
+
+	$("#countDisplay").append("<h2>attempts: " + count + "</h2>");
+
+
 
 	//Set of instructions to delete the pushed button 
 
@@ -155,16 +174,26 @@ $(document).on("click",".btn-primary" ,function(){
 			
 			$("#wordDisplay").append("<h2>" + answerArray.join("") + "</h2>");
 		
+			
 		}
 
 
 	}
 
 	if(answerArray.length === word.length){
+		
+		//clears all buttons then generates new ones
+		$("#buttons").empty();
+		createButtons();
 
-		alert("You Win! Keep Austin Weird :)");
-		$("#youWin").append("<h2>YOU WON!</h2>");
-		console.log("Congratualtions!")
+		//empties word display and length
+		$("#wordDisplay").empty();
+		$("#wordLength").empty();
+		
+		alert("Nice! You found the answer "+answerArray.join("")+" in "+count+" attempts");
+		count = 0; 
+		$("#countDisplay").empty();
+		console.log("Congratulations!")
 	}
 
 
@@ -176,7 +205,31 @@ $(document).on("click",".btn-primary" ,function(){
 
 
 
-//Document Ready 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Document Ready
 });
 
 
@@ -189,78 +242,5 @@ $(document).on("click",".btn-primary" ,function(){
 
 
 
-//Code Graveyard
-
-
-/*
-
-var showPlayerProgress = function(answerArray){
-	
-	alert(answerArray.join(" "));
-
-};
-
-var getGuess = function(){
-
-
-	return prompt("guess a letter");
-
-	
-};
-
-
-
-var showAnswerAndCongratulatePlayer = function(answerArray){
-
-	showPlayerProgress(answerArray);
-	alert("sweet, the answer was " + answerArray.join(" "));
-
-	};
-
-
-
-var updateGameState = function(guess, word, answerArray){
-
-//Update answerArray and return a number showing how many times the guess appears in the 
-
-	var appearances = 0;
-	for(var j = 0; j < word.length; j++){
-
-			if(word[j] === guess){
-				answerArray[j] = guess;
-				
-				appearances++;
-				
-				
-				}
-			}
-		
-	return appearances;
-		
-};
-
-while(remainingLetters > 0){
-	showPlayerProgress(answerArray);
-	var guess = getGuess();
-	if(guess === null){
-		break;
-
-	} else if (guess.length !== 1){
-		alert("enter a single letter, please")
-
-	}else{
-		
-		var correctGuess = updateGameState(guess, word, answerArray);
-		
-		remainingLetters = remainingLetters - correctGuess;
-
-	}
-
-	
-	}
-
-	showAnswerAndCongratulatePlayer(answerArray); 
-
-	*/
 
 
