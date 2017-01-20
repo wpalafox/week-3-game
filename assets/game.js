@@ -76,14 +76,7 @@ var chooseWord = function() {
 
 
 
-
-
-
-
-
-
-
-//======================ONCLICKEVENTS=========================//
+//======================ONCLICKEVENTS============================//
 
 //Start Game
 
@@ -134,15 +127,21 @@ $("#clickMe").on("click", function() {
 //Guess a letter and validate guess - basically the game loop
 $(document).on("click",".btn-primary" ,function(){
 
+	//handles and diplays the letters pushed
+
+
+
+
 	//handles and displays the number of attempts 
 	$("#countDisplay").empty();
 	count++;
 
+	wordDisplayBuffer = [];
 	$("#countDisplay").append("<h2>attempts: " + count + "</h2>");
 
 
 
-	//Set of instructions to delete the pushed button 
+	//handles the user inputs and compares to word array 
 
 	var letter = $(this).attr('dataLetter');
 	
@@ -151,46 +150,44 @@ $(document).on("click",".btn-primary" ,function(){
 	console.log("Index of letter is: "
 		+ index);
 
-	if(index > -1){
-		letters.splice(index, 1);
+	if(word.includes(letter)&&(!(answerArray.includes(letter)))){
+			answerArray.push(letter);
 	}
+	
+	
+	for(i=0;i <= word.length ;i++){
 
-	$('#buttons').empty();
-
-	createButtons();
-
-	 for(i=0;i <= word.length ;i++){
-
-		if(letter == word[i]){
-			
-			//splice the letter in the appropriate index position
-			answerArray.splice(i, 0, word[i]);
-
-			console.log("Good guess! %s", answerArray.join(""));
-
-			console.log("in Func");
-			
-			$("#wordDisplay").empty();
-			
-			$("#wordDisplay").append("<h2>" + answerArray.join("") + "</h2>");
-		
-			
+		if(answerArray.includes(word[i])){
+			wordDisplayBuffer.push(word[i]);
 		}
-
-
+					
+			
+			
 	}
 
-	if(answerArray.length === word.length){
+	console.log("Good guess! %s", answerArray.join(""));
+
+	$("#wordDisplay").empty();
+			
+	$("#wordDisplay").append("<h2>" + wordDisplayBuffer.join("") + "</h2>");
+		
+
+
+	if(wordDisplayBuffer.join("") === word){
 		
 		//clears all buttons then generates new ones
 		$("#buttons").empty();
 		createButtons();
 
 		//empties word display and length
+		//$("#wordDisplay").empty();
+		//$("#wordLength").empty();
+
+		//TODO: choose new word and clear answer array
+		chooseWord();
 		$("#wordDisplay").empty();
-		$("#wordLength").empty();
 		
-		alert("Nice! You found the answer "+answerArray.join("")+" in "+count+" attempts");
+		alert("Nice! You found the answer "+wordDisplayBuffer.join("")+" in "+count+" attempts");
 		count = 0; 
 		$("#countDisplay").empty();
 		console.log("Congratulations!")
